@@ -32,31 +32,31 @@ class RockPaperScissors
 end
 
 class RockPaperScissorCounter1 < RockPaperScissors
-  def draw?(player1_shape, player2_shape)
-    player1_shape == player2_shape
+  def draw?(palyer_1_shape, palyer_2_shape)
+    palyer_1_shape == palyer_2_shape
   end
 
-  def player1_wins?(player1_shape, player2_shape)
-    SHAPE_WINNING_RULES[player1_shape].to_sym == player2_shape
+  def palyer_1_wins?(palyer_1_shape, palyer_2_shape)
+    SHAPE_WINNING_RULES[palyer_1_shape].to_sym == palyer_2_shape
   end
 
-  def player2_wins?(player1_shape, player2_shape)
-    SHAPE_WINNING_RULES[player2_shape].to_sym == player1_shape
+  def palyer_2_wins?(palyer_1_shape, palyer_2_shape)
+    SHAPE_WINNING_RULES[palyer_2_shape].to_sym == palyer_1_shape
   end
 
-  def points_for_puzzle_1(player1_shape_synonym, player2_shape_synonym)
-    player1_shape = ROCK_PAPER_SCISSORS[player1_shape_synonym.to_sym].to_sym
-    player2_shape = ROCK_PAPER_SCISSORS[player2_shape_synonym.to_sym].to_sym
+  def points_for_puzzle_1(palyer_1_shape_synonym, palyer_2_shape_synonym)
+    palyer_1_shape = ROCK_PAPER_SCISSORS[palyer_1_shape_synonym.to_sym].to_sym
+    palyer_2_shape = ROCK_PAPER_SCISSORS[palyer_2_shape_synonym.to_sym].to_sym
 
-    if draw?(player1_shape, player2_shape)
+    if draw?(palyer_1_shape, palyer_2_shape)
       current_points = 3
-    elsif player1_wins?(player1_shape, player2_shape)
+    elsif palyer_1_wins?(palyer_1_shape, palyer_2_shape)
       current_points = 0
-    elsif player2_wins?(player1_shape, player2_shape)
+    elsif palyer_2_wins?(palyer_1_shape, palyer_2_shape)
       current_points = 6
     end
 
-    current_points += SHAPE_POINTS[player2_shape]
+    current_points += SHAPE_POINTS[palyer_2_shape]
   end
 
   def calculate_points(puzzle = 'puzzle_1')
@@ -73,29 +73,29 @@ class RockPaperScissorCounter2 < RockPaperScissors
     instruction == INSTRUCTION_TO_DRAW
   end
 
-  def player1_wins?(instruction)
+  def palyer_1_wins?(instruction)
     instruction == INSTRUCTION_TO_LOSE
   end
   
-  def player2_wins?(instruction)
+  def palyer_2_wins?(instruction)
     instruction == INSTRUCTION_TO_WIN
   end
 
-  def points_for_puzzle_2(player1_shape_synonym, instruction)
-    player1_shape = ROCK_PAPER_SCISSORS[player1_shape_synonym.to_sym]
+  def points_for_puzzle_2(palyer_1_shape_synonym, instruction)
+    palyer_1_shape = ROCK_PAPER_SCISSORS[palyer_1_shape_synonym.to_sym]
 
     if draw?(instruction)
       current_points = 3
-      player2_shape = player1_shape
-    elsif player1_wins?(instruction)
+      palyer_2_shape = palyer_1_shape
+    elsif palyer_1_wins?(instruction)
       current_points = 0
-      player2_shape = SHAPE_WINNING_RULES[player1_shape.to_sym]
-    elsif player2_wins?(instruction)
+      palyer_2_shape = SHAPE_WINNING_RULES[palyer_1_shape.to_sym]
+    elsif palyer_2_wins?(instruction)
       current_points = 6
-      player2_shape = SHAPE_WINNING_RULES.invert[player1_shape]
+      palyer_2_shape = SHAPE_WINNING_RULES.invert[palyer_1_shape]
     end
 
-    current_points += SHAPE_POINTS[player2_shape.to_sym]
+    current_points += SHAPE_POINTS[palyer_2_shape.to_sym]
   end
 
   def calculate_points(puzzle = 'puzzle_2')
