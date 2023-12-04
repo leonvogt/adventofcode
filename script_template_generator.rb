@@ -43,8 +43,8 @@ class ScriptTemplateGenerator
 end
 
 existing_years = Dir.glob("*").select { |f| File.directory? f }
-choosen_year = TTY::Prompt.new.select("For which year?", existing_years, filter: true)
-choosen_day = TTY::Prompt.new.select("For which day?", (1..31).to_a, filter: true, per_page: 20)
+choosen_year = TTY::Prompt.new.select("For which year?", existing_years.sort.reverse, filter: true)
+choosen_day = TTY::Prompt.new.select("For which day?", (1..25).to_a, filter: true, per_page: 20, default: Time.now.day)
 
 generator = ScriptTemplateGenerator.new(choosen_year, choosen_day)
 generator.create_files!
