@@ -21,7 +21,7 @@ class ScriptTemplateGenerator
     script = <<~SCRIPT
       require "pry"
 
-      File.readlines("day#{@day}_input.txt").each do |line|
+      File.readlines(File.dirname(__FILE__) + "/day#{@day}_input.txt", chomp: true).each do |line|
         puts line
       end
 
